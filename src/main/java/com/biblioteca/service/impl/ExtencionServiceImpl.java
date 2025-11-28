@@ -1,48 +1,48 @@
 package com.biblioteca.service.impl;
 
 import com.biblioteca.models.Extencion;
-import com.biblioteca.repo.ExtencionRepository;
+import com.biblioteca.repo.ExtencionRepo;
 import com.biblioteca.service.ExtencionService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ExtencionServiceImpl implements ExtencionService {
 
-    private final ExtencionRepository extencionRepository;
+    private final ExtencionRepo extencionRepo;
 
-    public ExtencionServiceImpl(ExtencionRepository extencionRepository) {
-        this.extencionRepository = extencionRepository;
+    public ExtencionServiceImpl(ExtencionRepo extencionRepo) {
+        this.extencionRepo = extencionRepo;
     }
 
     @Override
     public Iterable<Extencion> getAll() {
-        return extencionRepository.findAll();
+        return extencionRepo.findAll();
     }
 
     @Override
     public Extencion getById(int id) {
-        return extencionRepository.findById(id)
+        return extencionRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Extensión no encontrada"));
     }
 
     @Override
     public Extencion create(Extencion extencion) {
-        return extencionRepository.save(extencion);
+        return extencionRepo.save(extencion);
     }
 
     @Override
     public Extencion modify(Extencion extencion) {
-        if (!extencionRepository.existsById(extencion.getId())) {
+        if (!extencionRepo.existsById(extencion.getId())) {
             throw new RuntimeException("Extensión no encontrada");
         }
-        return extencionRepository.save(extencion);
+        return extencionRepo.save(extencion);
     }
 
     @Override
     public void delete(int id) {
-        if (!extencionRepository.existsById(id)) {
+        if (!extencionRepo.existsById(id)) {
             throw new RuntimeException("Extensión no encontrada");
         }
-        extencionRepository.deleteById(id);
+        extencionRepo.deleteById(id);
     }
 }

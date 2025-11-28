@@ -28,7 +28,21 @@ public class AutorServiceImpl implements AutorService {
 
     @Override
     public Autor create(Autor autor) {
-        return autorRepo.save(autor);
+        String nombre = autor.getNombre();
+
+        if (nombre == null || nombre.trim().isBlank()) {
+            throw new IllegalArgumentException("El nombre del autor es obligatorio");
+        }
+
+        String nombreNormalizado = nombre.trim();
+
+        return autorRepo.findByNombreIgnoreCase(nombreNormalizado)
+
+                .orElseGet(() -> {
+                    // si no existe el autor con ese nombre se crea uno nuevo
+                    autor.setNombre(nombreNormalizado);
+                    return autorRepo.save(autor);
+                });
     }
     
     @Override

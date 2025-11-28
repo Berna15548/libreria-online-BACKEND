@@ -10,10 +10,12 @@ public class Extencion {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
     boolean pdf;
     boolean audio;
     boolean video;
-    
+
+
     
 }

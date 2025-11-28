@@ -9,9 +9,7 @@ import lombok.Data;
 public class Editorial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Integer id;
     String nombre;
-    boolean esExtranjera;
-
     
 }

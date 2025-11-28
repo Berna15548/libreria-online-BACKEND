@@ -26,8 +26,23 @@ public class EditorialServiceImpl implements EditorialService {
 
     @Override
     public Editorial createEditorial(Editorial editorial) {
-        return editorialRepo.save(editorial);
+        String nombre = editorial.getNombre();
+
+        if (nombre == null || nombre.trim().isBlank()) {
+            throw new IllegalArgumentException("El nombre de la editorial es obligatorio");
+        }
+
+        String nombreNormalizado = nombre.trim();
+        
+        return editorialRepo.findByNombreIgnoreCase(nombreNormalizado)
+                
+                .orElseGet(() -> {
+            // si no existe el editor con ese nombre se crea uno nuevo
+            editorial.setNombre(nombreNormalizado);
+            return editorialRepo.save(editorial);
+        });
     }
+    
     @Override
     public void delete(int id) {
         editorialRepo.deleteById(id);

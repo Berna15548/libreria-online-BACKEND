@@ -3,6 +3,8 @@ import com.biblioteca.models.*;
 import com.biblioteca.service.LibroService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/libro")
 @CrossOrigin
@@ -15,12 +17,25 @@ public class LibroController {
         this.service = service;
     }
     
-
     @GetMapping()
     public Iterable<Libro> getLibro() {
         return service.getAll();
     }
 
+    @GetMapping("/por-genero")
+    public List<Libro> filtrarPorGenero(@RequestParam Integer generoId) {
+        return service.filtrarPorGenero(generoId);
+    }
+
+    @GetMapping("/buscar")  
+    public List<Libro> buscarLibros(@RequestParam String q) {
+        return service.buscarLibros(q);
+    }
+
+    @GetMapping("/{id}")
+    public Libro getLibroById(@PathVariable int id) {
+        return service.getById(id);
+    }
 
     @PostMapping
     public Libro create(@RequestBody Libro libro) {

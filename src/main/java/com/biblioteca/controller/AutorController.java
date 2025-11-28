@@ -2,10 +2,8 @@ package com.biblioteca.controller;
 
 import com.biblioteca.models.Autor;
 import com.biblioteca.service.AutorService;
-import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
 
 @RestController
 @RequestMapping("/api/autor")
