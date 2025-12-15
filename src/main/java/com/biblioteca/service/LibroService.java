@@ -12,6 +12,6 @@ public interface LibroService {
     void delete(Integer id);
     List<Libro> filtrarPorGenero(Integer generoId);
 
-    List<Libro> buscarLibros(String query); /*buscar libro por nombre*/
+    List<Libro> buscarLibros(String query);
 
 }

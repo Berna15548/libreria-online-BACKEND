@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Entity
 @Table(name="autor")
-@Data /*esto le avisa a lombok para q genere getters, setters y mas*/
+@Data 
 public class Autor {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

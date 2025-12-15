@@ -37,7 +37,6 @@ public class EditorialServiceImpl implements EditorialService {
         return editorialRepo.findByNombreIgnoreCase(nombreNormalizado)
                 
                 .orElseGet(() -> {
-            // si no existe el editor con ese nombre se crea uno nuevo
             editorial.setNombre(nombreNormalizado);
             return editorialRepo.save(editorial);
         });

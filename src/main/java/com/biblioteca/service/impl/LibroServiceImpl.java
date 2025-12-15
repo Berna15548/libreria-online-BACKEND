@@ -41,9 +41,6 @@ public class LibroServiceImpl implements LibroService {
                 .orElseThrow(() -> new NoSuchElementException("Libro no encontrado"));
     }
 
-    // ================================================================
-    // ======================= CREATE ==============================
-    // ================================================================
     @Override
     public Libro create(Libro libro) {
 
@@ -53,9 +50,6 @@ public class LibroServiceImpl implements LibroService {
         return libroRepo.save(libro);
     }
 
-    // ================================================================
-    // ======================== MODIFY =============================
-    // ================================================================
     @Override
     public Libro modify(Libro libro) {
 
@@ -69,27 +63,19 @@ public class LibroServiceImpl implements LibroService {
         return libroRepo.save(libro);
     }
 
-    // ================================================================
-    // ======================= DELETE ==============================
-    // ================================================================
+
     @Override
     @Transactional
     public void delete(Integer id) {
         libroRepo.deleteById(id);
     }
 
-    // ================================================================
-    // ===================== FILTRAR GENERO ========================
-    // ================================================================
     @Override
     public List<Libro> filtrarPorGenero(Integer generoId) {
         if (generoId == null) return libroRepo.findAll();
         return libroRepo.findByGeneroId(generoId);
     }
 
-    // ================================================================
-    // ===================== BUSCADOR ==============================
-    // ================================================================
     @Override
     public List<Libro> buscarLibros(String query) {
         if (query == null || query.isBlank()) {
@@ -99,19 +85,14 @@ public class LibroServiceImpl implements LibroService {
         return libroRepo.buscarPorTituloOAutor(filtro);
     }
 
-    // ================================================================
-    // ============= RESOLVER AUTOR / EDITORIAL ====================
-    // ================================================================
 
     private Autor resolverAutor(Autor autor) {
         if (autor == null) return null;
 
         if (autor.getId() != null) {
-            // Si se proporciona ID, buscar por ID
             return autorRepo.findById(autor.getId())
                     .orElseThrow(() -> new NoSuchElementException("Autor no encontrado con ID: " + autor.getId()));
         } else if (autor.getNombre() != null && !autor.getNombre().trim().isEmpty()) {
-            // Si se proporciona nombre (sin ID), buscar o crear por nombre
             String nombre = autor.getNombre().trim();
             return autorRepo.findByNombreIgnoreCase(nombre)
                     .orElseGet(() -> {
@@ -128,11 +109,9 @@ public class LibroServiceImpl implements LibroService {
         if (editorial == null) return null;
 
         if (editorial.getId() != null) {
-            // Si se proporciona ID, buscar por ID
             return editorialRepo.findById(editorial.getId())
                     .orElseThrow(() -> new NoSuchElementException("Editorial no encontrada con ID: " + editorial.getId()));
         } else if (editorial.getNombre() != null && !editorial.getNombre().trim().isEmpty()) {
-            // Si se proporciona nombre (sin ID), buscar o crear por nombre
             String nombre = editorial.getNombre().trim();
             return editorialRepo.findByNombreIgnoreCase(nombre)
                     .orElseGet(() -> {

@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 public class AutorServiceImpl implements AutorService {
     private final AutorRepo autorRepo;
 
-    //CONSTRUCTOR:
     public AutorServiceImpl(AutorRepo autorRepo) {
         this.autorRepo = autorRepo;
     }
 
-    //metodos definidos:
     @Override
     public Iterable<Autor> getAll(){
         return autorRepo.findAll();
@@ -39,7 +37,6 @@ public class AutorServiceImpl implements AutorService {
         return autorRepo.findByNombreIgnoreCase(nombreNormalizado)
 
                 .orElseGet(() -> {
-                    // si no existe el autor con ese nombre se crea uno nuevo
                     autor.setNombre(nombreNormalizado);
                     return autorRepo.save(autor);
                 });
