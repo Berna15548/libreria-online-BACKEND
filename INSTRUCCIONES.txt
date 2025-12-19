@@ -1,0 +1,8 @@
+
+   REEMPLAZAR LOS VALORES DE MYSQL EN application.properties ANTES DE INICIAR EL BACKEND:
+   src/main/resources/application.properties
+
+    ------------------------------------------------
+
+   REPLACE MYSQL VALUES IN application.properties BEFORE RUNNING THE BACKEND:
+   src/main/resources/application.properties
